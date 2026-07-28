@@ -270,6 +270,16 @@ if(NOT USE_MODULES)
   )
 endif()
 
+if(USE_VENDOR_STEAM)
+    add_library(steam_api64 SHARED IMPORTED GLOBAL)
+    set_target_properties(steam_api64 PROPERTIES
+        IMPORTED_LOCATION ${CMAKE_CURRENT_LIST_DIR}/libs/steam_api64.dll
+        IMPORTED_IMPLIB ${CMAKE_CURRENT_LIST_DIR}/libs/steam_api64.lib
+        INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_LIST_DIR}/include/steam
+    )
+    list(APPEND CC_EXTERNAL_LIBS steam_api64)
+endif()
+
 list(APPEND CC_EXTERNAL_INCLUDES
   ${CMAKE_CURRENT_LIST_DIR}/include
 )
