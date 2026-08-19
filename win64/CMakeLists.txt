@@ -278,6 +278,10 @@ if(USE_VENDOR_STEAM)
         INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_LIST_DIR}/include/steam
     )
     list(APPEND CC_EXTERNAL_LIBS steam_api64)
+
+    # Delay-load steam_api64.dll — loaded on first API call, not at process start
+    list(APPEND CC_EXTERNAL_LIBS delayimp)
+    add_link_options(/DELAYLOAD:steam_api64.dll)
 endif()
 
 list(APPEND CC_EXTERNAL_INCLUDES
